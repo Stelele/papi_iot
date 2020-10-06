@@ -1,6 +1,6 @@
 class PapiCameraVideo:
     
-    # Class attributes here
+    # Class attributes here testing content
     
     def __init__ (self): 
 	""" Initial state of the object by assigning the values of the object properties
