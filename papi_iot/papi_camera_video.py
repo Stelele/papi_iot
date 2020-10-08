@@ -14,25 +14,42 @@ class PapiCameraVideo:
         """
         
         self.camera = PiCamera()
+
+        self.cameraMode = False
+        self.videoMode = False
         
    
     def setCameraMode (self, resolution=(1024, 768)): 
         """ 
         
-        Switch the camera between infared cut-off and no infared cut-off filter 
+        Switch the camera to photo mode instead of video
+        ---------------------------------------------------------------------
+        Variables:
+        resolution: default (1024, 768) sets aspect ratio of photo taken
         
         """
+
+        if self.videoMode:
+            self.camera.stop_recording()
+            self.videoMode = False
 
         self.camera.resolution = resolution
         self.camera.start_preview()
 
         #camera warm-up time
         sleep(2)
+
+        self.cameraMode = True
         
     def setLowLightMode (self, alternateISO=False): 
         """
         
         Switch the camera mode to low light mode
+        -----------------------------------------------------------------------------
+        Variables:
+        alternateISO: chooses between two ISO values for Normal light conditions,
+                      if true, ISO set to 800 if false, ISO set to 400. The lower ISO
+                      means a lower sensitivity to light
         
         """
         
@@ -56,6 +73,11 @@ class PapiCameraVideo:
         """
         
         Switch the camera mode to normal light mode
+        --------------------------------------------------------------------------------
+        Variables:
+        alternateISO: chooses between two ISO values for Normal light conditions,
+                      if true, ISO set to 200 if false, ISO set to 100. The lower ISO
+                      means a lower sensitivity to light
         
         """
 
@@ -97,37 +119,60 @@ class PapiCameraVideo:
         """ 
         
         Capture the image of face in camera field of view. Note, assumes setCameraMode has been run
-        before running this function 
+        before running this function and all images are saved as jpg
         -------------------------------------------------------------------------------------------
-        variables:
-        name: chosen name of photo taken
+        Variables:
+        name: chosen name and path location of photo taken e.g. /path/to/save/to/testImage
 
         """
         name = name + '.jpg'
         self.camera.capture(name)
         
     
-    def recordVideoFor (self): 
+    def recordVideoFor (self, name, length = 60, resolution = (640, 480)): 
         """
         
-        Capture the footage of face in camera field of view
+        Capture the footage of face in camera field of view for a limited time
+        -----------------------------------------------------------------------------------------------
+        Variables:
+        name: chosen name and path location of video recorded e.g /path/to/save/to/testVideo
+        length: default 60,  seconds of recording you want to record for
+        resolution: default (640, 480) aspect ratio of recorded video
         
         """
+
+        if self.cameraMode:
+            self.camera.stop_preview()
+            self.cameraMode = False
+
+        self.videoMode = True
+
+        self.camera.start_recording(name + '.h264')
+        self.camera.wait_recording(length)
+        self.camera.stop_recording()
+
+        self.videoMode = False
         
-        # Add code here
-        
-        pass
     
-    def recordVideo (self): 
+    def recordVideo (self, name, resolution = (640, 480)): 
         """
         
         Capture the footage of face in camera field of view
+        -----------------------------------------------------------------------------------------------
+        Variables:
+        name: chosen name and path location of video recorded e.g /path/to/save/to/testVideo
+        resolution: default (640, 480) aspect ratio of recorded video
         
         """
         
-        # Add code here
-        
-        pass
+        if self.cameraMode:
+            self.camera.stop_preview()
+            self.cameraMode = False
+
+        self.videoMode = True
+
+        self.camera.start_recording(name + '.h264')
+        self.camera.wait_recording()
     
     def stopVideoRecording (self): 
         """
@@ -135,13 +180,7 @@ class PapiCameraVideo:
         Stop the video recording
         
         """
-        
-        # Add code here
-        
-        pass
 
-if __name__ == "__main__":
-    test = PapiCameraVideo()
-    test.setCameraMode()
-    test.autoAdjustToLight()
-    test.takePhoto("test")
+        if self.videoMode
+            self.videoMode = False
+            self.camera.stop_recording()
