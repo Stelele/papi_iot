@@ -5,6 +5,7 @@ import cv2
 
 class PapiFaceRecognition:
     # Class attributes here
+    directories = OfflineStorage()
     known_faces = []
     known_names = []
 
