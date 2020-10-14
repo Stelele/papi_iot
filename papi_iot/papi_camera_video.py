@@ -181,6 +181,6 @@ class PapiCameraVideo:
         
         """
 
-        if self.videoMode
+        if self.videoMode:
             self.videoMode = False
             self.camera.stop_recording()
