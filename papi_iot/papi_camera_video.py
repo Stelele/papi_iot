@@ -129,7 +129,7 @@ class PapiCameraVideo:
         self.camera.capture(name)
         
     
-    def recordVideoFor (self, name, length = 60, resolution = (640, 480)): 
+    def recordVideoFor (self, name, length = 60, resolution = (640, 480), videoType='.h264'): 
         """
         
         Capture the footage of face in camera field of view for a limited time
@@ -138,7 +138,8 @@ class PapiCameraVideo:
         name: chosen name and path location of video recorded e.g /path/to/save/to/testVideo
         length: default 60,  seconds of recording you want to record for
         resolution: default (640, 480) aspect ratio of recorded video
-        
+        videoType: default .h264 video encording. Supported encording '.h264', '.mjpeg'
+
         """
 
         if self.cameraMode:
@@ -147,14 +148,14 @@ class PapiCameraVideo:
 
         self.videoMode = True
 
-        self.camera.start_recording(name + '.h264')
+        self.camera.start_recording(name + videoType)
         self.camera.wait_recording(length)
         self.camera.stop_recording()
 
         self.videoMode = False
         
     
-    def recordVideo (self, name, resolution = (640, 480)): 
+    def recordVideo (self, name, resolution = (640, 480), videoType='.h264'): 
         """
         
         Capture the footage of face in camera field of view
@@ -162,6 +163,7 @@ class PapiCameraVideo:
         Variables:
         name: chosen name and path location of video recorded e.g /path/to/save/to/testVideo
         resolution: default (640, 480) aspect ratio of recorded video
+        videoType: default .h264 video encording. Supported encording '.h264', '.mjpeg'
         
         """
         
@@ -171,7 +173,7 @@ class PapiCameraVideo:
 
         self.videoMode = True
 
-        self.camera.start_recording(name + '.h264')
+        self.camera.start_recording(name + videoType)
         self.camera.wait_recording()
     
     def stopVideoRecording (self): 
