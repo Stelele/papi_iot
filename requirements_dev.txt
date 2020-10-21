@@ -20,7 +20,6 @@ scipy
 cmake==3.18.2.post1
 cookiecutter==1.7.2
 cryptography==2.8
-dlib==19.21.0
 face-recognition==1.4.0
 face-recognition-models==0.3.0
 Flask==1.1.2
