@@ -1,0 +1,16 @@
+face_recognition_models
+Click>=6.0
+dlib>=19.3.0
+numpy
+Pillow
+scipy>=0.17.0
+cmake==3.18.2.post1
+cookiecutter==1.7.2
+cryptography==2.8
+dlib==19.21.0
+face-recognition==1.4.0
+face-recognition-models==0.3.0
+Flask==1.1.2
+opencv-python==4.4.0.44
+Pillow==7.2.0
+waitress==1.4.4
