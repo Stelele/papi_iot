@@ -173,7 +173,7 @@ class PapiFaceRecognition (object):
                 face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
-                    name = known_names[best_match_index]
+                    name = self.known_names[best_match_index]
 
                 print(name)
                 #print(face_locations)
@@ -203,24 +203,28 @@ class PapiFaceRecognition (object):
         return jpeg.tobytes(), image
 
     def faceRecognitionFromVideo (self):
-        while True:
-            ret, frame = self.getFrame ()
-            # Display the resulting image
-            cv2.imshow('video', frame)
+        try:
+            while True:
+                ret, frame = self.getFrame ()
+                # Display the resulting image
+                cv2.imshow('video', frame)
 
-            # Hit 'q' on the keyboard to quit!
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                # Hit 'q' on the keyboard to quit!
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
 
-        # Release handle to the webcam
-        self.video.release()
-        cv2.destroyAllWindows()
+        except KeyboardInterrupt:
+            pass
+        finally:
+            # Release handle to the webcam
+            self.video.release()
+            cv2.destroyAllWindows()
 
-#if __name__ == "__main__":
-    #unit = PapiFaceRecognition()
+if __name__ == "__main__":
+    unit = PapiFaceRecognition()
 
     # unit.faceRecognitionFromPhoto()
-    # unit.faceRecognitionFromVideo()
+    unit.faceRecognitionFromVideo()
 
 
     
