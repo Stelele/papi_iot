@@ -103,3 +103,7 @@ ENV/
 
 # IDE settings
 .vscode/
+
+**/papi-iot.json
+**/client_secret_email.json
+**/token.pickle
