@@ -1,12 +1,27 @@
 # Config file for automatic testing at travis-ci.com
 
-language: python
-python:
-  - 3.8
-  - 3.7
-  - 3.6
+language: generic
+#python:
+#  - 3.8
+#  - 3.7
+#  - 3.6
 
+virtualenv:
+  system_site_packages: true
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+before_install:
+  - apt update && apt upgrade -y
+  - sudo apt-get install build-essential checkinstall
+  - sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+  - cd /opt
+  - sudo wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
+  - sudo tar xzf Python-3.8.0.tgz
+  - cd Python-3.8.0
+  - sudo ./configure --enable-optimizations
+  - sudo make altinstall
+  - update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
+  - update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+
 install:
   - pip install -U tox-travis
 
