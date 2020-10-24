@@ -1,9 +1,10 @@
 from shutil import copy
 from os import listdir
 from os import makedirs
+from os import path
 from matplotlib import image
 
-class OfflineStorage:
+class OfflineStorage (object):
     rootDir = 'home/pi'
     knownFaces = '/knownFaces'
     # nameLabel = '/name'
@@ -18,8 +19,22 @@ class OfflineStorage:
         self.setOfflineVideoStorageLocation()
         
     def setOfflinePhotoStorageLocation(self):
-        makedirs(self.rootDir + '/photos' +  self.knownFaces)
-        makedirs(self.rootDir + '/photos' +  self.unknownFaces)
+        pathKnownFaces = self.rootDir + '/photos' +  self.knownFaces
+        pathUknownFaces = self.rootDir + '/photos' +  self.unknownFaces
+        
+        if (path.isdir(pathKnownFaces) == False):
+            try: 
+                makedirs(pathKnownFaces,exist_ok = True)
+                print("Directory '%s' created successfully" %pathKnownFaces) 
+            except OSError as error: 
+                print("Directory '%s' can not be created") 
+            
+        if (path.isdir(pathUknownFaces) == False):
+            try: 
+                makedirs(pathUknownFaces,exist_ok = True)
+                print("Directory '%s' created successfully" %pathUknownFaces) 
+            except OSError as error: 
+                print("Directory '%s' can not be created")
 
     #def setOfflinePhotoStorageNameLabelLocation(self, name)
     #    '''
@@ -40,7 +55,13 @@ class OfflineStorage:
             return './' + self.rootDir + '/photos' + self.unknownFaces
 
     def setOfflineVideoStorageLocation(self):
-        makedirs(self.rootDir + '/videos')
+        pathVideos = self.rootDir + '/videos'
+        if (path.isdir(pathVideos) == False):
+            try: 
+                makedirs(pathVideos, exist_ok = True)
+                print("Directory '%s' created successfully" %pathVideos) 
+            except OSError as error: 
+                print("Directory '%s' can not be created")
 
     def storeOfflinePhotos(self, filename, destination):
         """
