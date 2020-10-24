@@ -12,10 +12,10 @@ before_install:
   - sudo dpkg -L python-opencv
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: travis_wait pip install -U tox-travis
+install: pip install -U tox-travis
 
 # Command to run tests, e.g. python setup.py test
-script: tox
+script: travis_wait tox
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
