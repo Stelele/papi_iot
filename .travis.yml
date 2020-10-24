@@ -12,6 +12,7 @@ install:
 
 # Command to run tests, e.g. python setup.py test
 script:
+  - pip install --upgrade pip
   - pip install opencv-python  
   - travis_wait tox
 
