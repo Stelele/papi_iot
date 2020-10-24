@@ -2,9 +2,6 @@
 
 language: python
 
-arch:
-  - arm64
-
 python:
   - 3.8
   - 3.7
@@ -16,7 +13,7 @@ install:
 
 # Command to run tests, e.g. python setup.py test
 script:
-  - travis_wait tox
+  - tox
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
