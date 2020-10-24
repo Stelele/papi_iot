@@ -2,9 +2,16 @@
 
 language: python
 
-env:
-  - ARCH=x64
-  - ARCH=arm
+arch:
+  - amd64
+  - arm64
+
+matrix:
+    include:
+      - os: linux
+        arch: amd64
+      - os: linux
+        arch: amd64
 
 python:
   - 3.8

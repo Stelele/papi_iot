@@ -68,6 +68,6 @@ echo "Running tests"
 echo "Environment: $(uname -a)"
 
 # PiCamera Dependancy
-pip install python-picamera python3-picamera
+pip install -U picamera
 
 ${TEST_COMMAND}
