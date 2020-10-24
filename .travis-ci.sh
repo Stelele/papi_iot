@@ -18,7 +18,7 @@ TEST_COMMAND="make test"
 function setup_arm_chroot {
     # Host dependencies
     #sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
-    sudo apt-get install gnupg dirmngr curl qemu-user-static binfmt-support
+    sudo apt-get install --fix-missing -qq -y gnupg dirmngr curl qemu-user-static binfmt-support
 
     # Create chrooted environment
     sudo mkdir ${CHROOT_DIR}
@@ -68,6 +68,6 @@ echo "Running tests"
 echo "Environment: $(uname -a)"
 
 # PiCamera Dependancy
-sudo apt-get install python-picamera python3-picamera
+pip install python-picamera python3-picamera
 
 ${TEST_COMMAND}
