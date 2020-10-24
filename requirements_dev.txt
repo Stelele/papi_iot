@@ -36,3 +36,4 @@ waitress==1.4.4
 dlib>=19.3.0
 cmake==3.18.2.post1
 matplotlib
+picamera
