@@ -10,3 +10,14 @@ twine==3.2.0
 
 pytest==6.1.1
 pytest-runner==5.2
+
+cmake
+dlib
+face-recognition
+face-recognition-models
+Flask
+opencv-python
+google-api-python-client 
+google-auth-httplib2 
+google-auth-oauthlib
+google-cloud-storage
