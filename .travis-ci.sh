@@ -7,7 +7,7 @@ VERSION=wheezy
 CHROOT_ARCH=armhf
 
 # Debian package dependencies for the host
-HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild"
+HOST_DEPENDENCIES="sbuild schroot debootstrap qemu-user-static binfmt-support"
 
 # Debian package dependencies for the chrooted environment
 GUEST_DEPENDENCIES="build-essential git m4 sudo python"
@@ -17,10 +17,8 @@ TEST_COMMAND="make test"
 
 function setup_arm_chroot {
     # Host dependencies
-    sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
-
-    # PiCamera Dependancy
-    sudo apt-get install python-picamera python3-picamera
+    #sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
+    sudo apt-get install gnupg dirmngr curl sbuild ubuntu-dev-tools qemu-user-static binfmt-support
 
     # Create chrooted environment
     sudo mkdir ${CHROOT_DIR}
@@ -68,5 +66,8 @@ fi
 
 echo "Running tests"
 echo "Environment: $(uname -a)"
+
+# PiCamera Dependancy
+sudo apt-get install python-picamera python3-picamera
 
 ${TEST_COMMAND}
