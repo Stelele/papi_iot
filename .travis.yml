@@ -11,8 +11,6 @@ install:
 
 # Command to run tests, e.g. python setup.py test
 script:
-  - pip install --user --upgrade pip
-  - pip install --user opencv-python  
   - travis_wait tox
 
 # Assuming you have installed the travis-ci CLI tool, after you
