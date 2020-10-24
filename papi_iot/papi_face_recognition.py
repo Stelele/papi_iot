@@ -215,18 +215,23 @@ class PapiFaceRecognition (object):
         return jpeg.tobytes(), image
 
     def faceRecognitionFromVideo (self):
-        while True:
-            ret, image = self.getFrame ()
-            # Display the resulting image
-            cv2.imshow('video', image)
 
-            # Hit 'q' on the keyboard to quit!
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+        try:
+            while True:
+                ret, frame = self.getFrame ()
+                # Display the resulting image
+                cv2.imshow('video', frame)
 
-        # Release handle to the webcam
-        self.video.release()
-        cv2.destroyAllWindows()
+                # Hit 'q' on the keyboard to quit!
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+        except KeyboardInterrupt:
+            pass
+        finally:
+            # Release handle to the webcam
+            self.video.release()
+            cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     unit = PapiFaceRecognition()

@@ -121,6 +121,9 @@ class OfflineStorage (object):
             videoList.append(videoData)
         return videoList
 
+    def storeNewKnownUser(self, filename):
+        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces'))
+
 if __name__ == "__main__":
     unit = OfflineStorage ()
 

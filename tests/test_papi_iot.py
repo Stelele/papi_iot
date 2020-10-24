@@ -5,7 +5,7 @@
 import pytest
 
 
-from papi_iot import papi_iot
+#from papi_iot.papi_iot import PAPIIOT
 
 
 @pytest.fixture
