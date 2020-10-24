@@ -1,5 +1,5 @@
 from flask import Flask, render_template, Response, request
-from papi_face_recognition import PapiFaceRecognition
+from papi_iot.papi_face_recognition import PapiFaceRecognition
 import time
 import os
 
