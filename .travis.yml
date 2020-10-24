@@ -18,8 +18,7 @@ before_install:
   - cd Python-3.8.0
   - sudo ./configure --enable-optimizations
   - sudo make altinstall
-  - update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
-  - update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
+
 
 install:
   - pip install -U tox-travis
