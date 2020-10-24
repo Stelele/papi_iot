@@ -3,15 +3,7 @@
 language: python
 
 arch:
-  - amd64
   - arm64
-
-matrix:
-    include:
-      - os: linux
-        arch: amd64
-      - os: linux
-        arch: amd64
 
 python:
   - 3.8
@@ -20,10 +12,11 @@ python:
 
 install:
   - pip install -r requirements_dev.txt
+  - pip install -U tox-travis
 
 # Command to run tests, e.g. python setup.py test
 script:
-  - bash -ex .travis-ci.sh
+  - travis_wait tox
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
