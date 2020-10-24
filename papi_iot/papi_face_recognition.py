@@ -3,6 +3,8 @@ import os
 import cv2
 import time
 import numpy as np
+from papi_storage_offline import OfflineStorage
+import random
 
 class PapiFaceRecognition (object):
     known_faces_dir = None
@@ -24,15 +26,16 @@ class PapiFaceRecognition (object):
         """
             Initial state of the object by assigning the values of the object’s properties
         """
-        self.known_faces_dir = './home/pi/photos/knownFaces' 
-        self.unknown_faces_dir = './home/pi/photos/unknownFaces' 
+        fn = OfflineStorage ()
+        self.known_faces_dir = fn.getOfflinePhotoStorageLocation('knownFaces')  
+        self.unknown_faces_dir = fn.getOfflinePhotoStorageLocation('unknownFaces')  
         self.tolerance = 0.6
         self.frame_thickness = 3
         self.font_thickness = 2
         self.model = 'cnn'
         self.video = cv2.VideoCapture(0)
         self.known_names = []
-        self.known_faces = [] 
+        self.known_faces = []
         self.known_face_encodings = [] 
         self.locations = []
         self.encodings = []
@@ -162,6 +165,7 @@ class PapiFaceRecognition (object):
 
             global name_gui;
             #face_names = []
+            i = 0
             for face_encoding in self.encodings:
                 # See if the face is a match for the known face(s)
                 matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
@@ -173,9 +177,17 @@ class PapiFaceRecognition (object):
                 face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
                 best_match_index = np.argmin(face_distances)
                 if matches[best_match_index]:
-                    name = known_names[best_match_index]
+                    name = self.known_names[best_match_index]
 
                 print(name)
+                # This is how I SAVE face profiles from unknown people
+                # This is where the logic for notification should be inserted I believe
+                
+                if name == "Unknown":
+                    cv2.imwrite('{dst}/{index}.jpg'.format(dst = self.unknown_faces_dir, index = i), image)
+                    print('Saved {dst}/{index}.jpg'.format(dst = self.unknown_faces_dir, index = i))
+                    i += 1
+                    
                 #print(face_locations)
                 self.face_names.append(name)
         
@@ -204,9 +216,9 @@ class PapiFaceRecognition (object):
 
     def faceRecognitionFromVideo (self):
         while True:
-            ret, frame = self.getFrame ()
+            ret, image = self.getFrame ()
             # Display the resulting image
-            cv2.imshow('video', frame)
+            cv2.imshow('video', image)
 
             # Hit 'q' on the keyboard to quit!
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -216,11 +228,11 @@ class PapiFaceRecognition (object):
         self.video.release()
         cv2.destroyAllWindows()
 
-#if __name__ == "__main__":
-    #unit = PapiFaceRecognition()
+if __name__ == "__main__":
+    unit = PapiFaceRecognition()
 
     # unit.faceRecognitionFromPhoto()
-    # unit.faceRecognitionFromVideo()
+    unit.faceRecognitionFromVideo()
 
 
     
