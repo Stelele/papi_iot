@@ -3,7 +3,7 @@ import os
 import cv2
 import time
 import numpy as np
-from papi_iot.papi_storage_offline import OfflineStorage
+from papi_storage_offline import OfflineStorage
 import random
 
 class PapiFaceRecognition (object):

@@ -1,5 +1,5 @@
 from google.cloud import storage
-from papi_iot.papi_exceptions import BlobNotFound, NoBlobsFound
+from papi_exceptions import BlobNotFound, NoBlobsFound
 import glob
 
 class OnlineStorage:

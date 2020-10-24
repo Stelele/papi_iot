@@ -36,7 +36,7 @@ div.full_width div{color:#666666; background-color:#DEDEDE;}
     <ul class="clear">
       <li class="active first"><a href="/">Homepage</a></li>
       <li><a href="{{ url_for('show_video') }}">Video Feed</a></li>
-      <li><a href="{{ url_for('new_user') }}">Add User</a></li>
+       <li><a href="{{ url_for('new_user') }}">Add User</a></li>
       <li><a href="{{ url_for('remove_user') }}">Remove User</a></li>
     </ul>
   </nav>
@@ -46,22 +46,14 @@ div.full_width div{color:#666666; background-color:#DEDEDE;}
   <div id="container">
     <!-- ################################################################################################ -->
     <div class="full_width clear">
-      <h2><a href="{{ url_for('video_feed') }}"  target="_blank">Watch Video Feed</a></h2>
+      <h2>Video Feed</h2>
     </div>
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
     <div class="full_width clear">
-      <h2><a href="{{ url_for('new_user') }}">Add New User</a></h2>
+      <img style="width: 100%; height:80%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">
     </div>
- 
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="full_width clear">
-      <h2><a href="{{ url_for('remove_user') }}">Ban A User</a></h2>
-    </div>
-    
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
+
 
     <!-- ################################################################################################ -->
   </div>
