@@ -16,9 +16,11 @@ Click>=7.1.2
 dlib>=19.3.0
 cmake==3.18.2.post1
 cookiecutter==1.7.2
-cryptography==2.8
-face-recognition
+
+cryptography==3.1.1
+face-recognition==1.3.0
+
 face-recognition-models==0.3.0
 Flask==1.1.2
-Pillow==7.2.0
+Pillow==8.0.1
 waitress==1.4.4
