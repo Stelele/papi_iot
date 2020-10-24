@@ -1,5 +1,5 @@
-from papi_iot.papi_storage_online import OnlineStorage
-from papi_iot.papi_storage_offline import OfflineStorage 
+from papi_storage_online import OnlineStorage
+from papi_storage_offline import OfflineStorage 
 
 class StorageManager:
     
