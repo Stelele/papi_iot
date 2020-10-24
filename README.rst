@@ -18,17 +18,25 @@ PAPI IOT
      :target: https://pyup.io/repos/github/Stelele/papi_iot/
      :alt: Updates
 
+An API for home security system using raspberry Pi with Pi IR camera and facial recognition.
 
-
-An API for IOT application with emphasis on some module
-
-
+* Github repo: PAPI IOT
 * Free software: MIT license
 * Documentation: https://papi-iot.readthedocs.io.
 
 
 Features
 --------
+
+* TODO
+
+Build Status
+------------
+
+*TODO
+
+Quick Start
+-----------
 
 * TODO
 
