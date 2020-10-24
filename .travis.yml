@@ -7,11 +7,11 @@ python:
   - 3.6
 
 install:
-  - pip install -U tox-travis
+  - pip install -r requirements_dev.txt
 
 # Command to run tests, e.g. python setup.py test
 script:
-  - travis_wait tox
+  - py.test
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
