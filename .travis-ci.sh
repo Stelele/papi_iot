@@ -19,6 +19,9 @@ function setup_arm_chroot {
     # Host dependencies
     sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
 
+    # PiCamera Dependancy
+    sudo apt-get install python-picamera python3-picamera
+
     # Create chrooted environment
     sudo mkdir ${CHROOT_DIR}
     sudo debootstrap --foreign --no-check-gpg --include=fakeroot,build-essential \
