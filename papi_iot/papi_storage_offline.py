@@ -1,3 +1,4 @@
+import os
 from shutil import copy
 from os import listdir
 from os import makedirs
@@ -119,12 +120,23 @@ class OfflineStorage (object):
         for filename in listdir('./' + self.rootDir + '/videos'):
             videoData = image.imread('./' + self.rootDir + '/videos' + '/' + filename)
             videoList.append(videoData)
-            
+
         return videoList
 
     def storeNewKnownUser(self, filename):
-        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces'))
-    
-    def storeUnknownPhoto(self, filename):
-        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('unknownFaces'))
+        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces') + '/' + filename)
+
+    def removeKnownUser(self, userName):
+        fileName = self.getOfflinePhotoStorageLocation('knownFaces') + '/' + userName + '.jpg'
+        return self.removeFile(fileName)
+
+    def removeFile(self, fileName):
+        removed = False
+
+        if os.path.exists(fileName):
+            os.remove(fileName)
+            removed = True
+
+        return removed
+        
 
