@@ -8,7 +8,7 @@ python:
 
 before_install:
   - sudo apt update
-  - sudo apt install python3-opencv
+  - sudo apt install python-opencv
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -U tox-travis
