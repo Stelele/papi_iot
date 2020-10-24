@@ -119,11 +119,12 @@ class OfflineStorage (object):
         for filename in listdir('./' + self.rootDir + '/videos'):
             videoData = image.imread('./' + self.rootDir + '/videos' + '/' + filename)
             videoList.append(videoData)
+            
         return videoList
 
     def storeNewKnownUser(self, filename):
         self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces'))
-
-if __name__ == "__main__":
-    unit = OfflineStorage ()
+    
+    def storeUnknownPhoto(self, filename):
+        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('unknownFaces'))
 
