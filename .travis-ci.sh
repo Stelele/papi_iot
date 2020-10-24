@@ -18,7 +18,7 @@ TEST_COMMAND="make test"
 function setup_arm_chroot {
     # Host dependencies
     #sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
-    sudo apt-get install gnupg dirmngr curl sbuild ubuntu-dev-tools qemu-user-static binfmt-support
+    sudo apt-get install gnupg dirmngr curl qemu-user-static binfmt-support
 
     # Create chrooted environment
     sudo mkdir ${CHROOT_DIR}
