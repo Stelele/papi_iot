@@ -148,7 +148,7 @@ class PapiFaceRecognition (object):
 
     def getFrame (self):
         success, image = self.video.read()
-            
+        unknownPhotoName = None
         self.process_this_frame = True
         
         # Resize frame of video to 1/4 size for faster face recognition processing
@@ -184,8 +184,9 @@ class PapiFaceRecognition (object):
                 # This is where the logic for notification should be inserted I believe
                 
                 if name == "Unknown":
-                    cv2.imwrite('{dst}/{index}.jpg'.format(dst = self.unknown_faces_dir, index = i), image)
-                    print('Saved {dst}/{index}.jpg'.format(dst = self.unknown_faces_dir, index = i))
+                    unknownPhotoName = '{dst}/{index}.jpg'.format(dst = self.unknown_faces_dir, index = i)
+                    cv2.imwrite(unknownPhotoName, image)
+                    print('Saved {}'.format(unknownPhotoName))
                     i += 1
                     
                 #print(face_locations)
@@ -212,7 +213,7 @@ class PapiFaceRecognition (object):
             cv2.putText(image, name_gui, (left + 10, bottom - 10), font, 1.0, (0, 0, 0), 1)
 
         ret, jpeg = cv2.imencode('.jpg', image)
-        return jpeg.tobytes(), image
+        return jpeg.tobytes(), image, unknownPhotoName
 
     def faceRecognitionFromVideo (self):
 
