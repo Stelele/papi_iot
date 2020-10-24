@@ -140,18 +140,3 @@ class PAPIEmail:
                 .execute())
         print('Message Id: %s' % message['id'])
         return message
-
-
-if __name__ == '__main__':
-    path_to_pickle = r"client_secret_email.json"
-    subject = "Hi! from python"
-    sender = "giftmugweni@gmail.com"
-    to = "mgwgif001@myuct.ac.za"
-    message = "This e-mail is sent from Gmail API via python! Isn't that Cool?"
-    file = "./home/pi/photos/knownFaces/Stallon.jpg"
-    test = PAPIEmail()
-
-    test.getCredentials('client_secret_email.json')
-    result = test.send_message(sender,to,subject,message,file)
-
-    print(result)
