@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<title>RS-MQF 1140 V.2</title>
+<title>PAPI IOT</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}" type="text/css" media="all">
@@ -48,6 +48,37 @@ div.full_width div{color:#666666; background-color:#DEDEDE;}
     <div class="full_width clear">
       <h2>Remove a user</h2>
     </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    {% if removed %}
+      <div class = "full_width clear">
+        <h3>The User has been removed</h3>
+      </div>
+      <div class = "full_width clear">
+        <br/>
+      </div>
+    {% endif %}
+
+    {% if notRemoved %}
+      <div class = "full_width clear">
+        <h3>The User was not found in database</h3>
+      </div>
+      <div class = "full_width clear">
+        <br/>
+      </div>
+    {% endif %}
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+     
+    <form action="{{ url_for('remove_user') }}" method = "POST">
+      <div class="full_width clear">
+          <div class="one_half first clear">Enter name of user to remove</div>
+          <div class="one_half"><input type="text" name = "remove_user" /></div>
+      </div>
+      <div class "full_width clear">
+          <input type = "submit" />
+      </div>
+    </form>
     <!-- ################################################################################################ -->
   </div>
 </div>
