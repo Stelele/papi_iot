@@ -143,7 +143,7 @@ class PapiFaceRecognition (object):
         rgb_small_frame = small_frame[:, :, ::-1]
         
         # Only process every other frame of video to save time
-        if self.process_this_frame % 10 == 0:
+        if self.process_this_frame % 1 == 0:
             # Find all the faces and face encodings in the current frame of video
             self.locations = face_recognition.face_locations(rgb_small_frame)
             self.encodings = face_recognition.face_encodings(rgb_small_frame, self.locations)

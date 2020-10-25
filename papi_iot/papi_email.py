@@ -3,6 +3,7 @@ import pickle
 import os.path
 import base64
 import mimetypes
+import json
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
@@ -10,6 +11,9 @@ from email.mime.base import MIMEBase
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+from oauth2client.client import flow_from_clientsecrets
+from google_auth_oauthlib.flow import Flow
+
 
 
 class PAPIEmail:
@@ -41,14 +45,29 @@ class PAPIEmail:
             if self.creds and self.creds.expired and self.creds.refresh_token:
                 self.creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    f"{PATH}", SCOPES)
-                self.creds = flow.run_local_server(port=0)
+                #flow = InstalledAppFlow.from_client_secrets_file(
+                #    f"{PATH}", SCOPES)
+                #self.creds = flow.run_local_server(port=0)
+                redirect = json.load(PATH)['redirect_uris'][0]
+                flow = Flow.from_client_secrets_file(PATH, 
+                                                    scopes=SCOPES,
+                                                    redirect_uri=redirect)
+                auth_url, _ = flow.authorization_url(prompt='consent')
+
+                print('Please go to this URL: {}'.format(auth_url))
+
+                # The user will get an authorization code. This code is used to get the
+                # access token.
+                code = input('Enter the authorization code: ')
+                flow.fetch_token(code=code)
+                
+                self.creds = flow.credentials
+
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
                 pickle.dump(self.creds, token)
 
-        self.service = build('gmail', 'v1', credentials=self.creds)
+        self.service = build('gmail', 'v1', credentials=self.creds, cache_discovery=False)
 
     def create_message(self, sender, to, subject, message_text):
         """Create a message for an email.
