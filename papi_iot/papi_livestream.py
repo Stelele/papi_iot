@@ -1,3 +1,4 @@
+from operator import index
 from flask import Flask, render_template, Response, request
 from papi_face_recognition import PapiFaceRecognition
 from papi_storage_offline import OfflineStorage
@@ -30,21 +31,20 @@ def gen(camera):
     while True:
         frame, image, unknownPhotoName = camera.getFrame()
 
-        if unknownPhotoName != None: #and unknownPhotoName != oldPhotoName:
-            if oldPhotoName != None:
-                unknownPath = unknownPhotoName.split('/')
-                unknownPath[-1] = str(index) + unknownPath[-1]
-                temp = '/'.join(unknownPath)
-                copy(unknownPhotoName, temp)
-                #check = multiprocessing.Process(target=check_face_send,args=(temp,oldPhotoName,sendTo,))
-                #check.start()
-                #check.join()
-                check_face_send(temp,oldPhotoName,sendTo,index=index)
+        if unknownPhotoName != None:
+            unknownPath = unknownPhotoName.split('/')
+            unknownPath[-1] = 'old_frame.jpg'
+            temp = '/'.join(unknownPath)
+            
+            if os.path.exists(temp):           
+                check_face_send(unknownPhotoName,temp,sendTo,index)
                 index += 1
             else:
                 email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', unknownPhotoName)
 
-            oldPhotoName = unknownPhotoName
+            if(index % 10 == 0):       
+                copy(unknownPhotoName, temp)
+                oldPhotoName = temp
 
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
@@ -87,7 +87,7 @@ def remove_user():
     return render_template('remove_user.html')
 
 
-def check_face_send(newpictureName,oldPicture, sendTo, index):
+def check_face_send(newpictureName,oldPicture, sendTo,index):
     if(index % 10 == 0): 
         newImage = face_recognition.load_image_file(newpictureName)
         oldImage = face_recognition.load_image_file(oldPicture)
@@ -102,8 +102,6 @@ def check_face_send(newpictureName,oldPicture, sendTo, index):
 
             if not (True in results):
                 email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', newpictureName)
-    
-    os.remove(newpictureName)
 
 if __name__ == '__main__':
     from waitress import serve
