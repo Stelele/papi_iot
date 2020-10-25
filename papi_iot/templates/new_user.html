@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<title>RS-MQF 1140 V.2</title>
+<title>PAPI IOT</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}" type="text/css" media="all">
@@ -48,6 +48,25 @@ div.full_width div{color:#666666; background-color:#DEDEDE;}
     <div class="full_width clear">
       <h2>Add a User</h2>
     </div>
+    <!-- ################################################################################################ -->
+    {% if added %}
+      <div class = "full_width clear">
+        <h3>The User has been successfully added</h3>
+      </div>
+      <div class = "full_width clear">
+        <br/>
+      </div>
+    {% endif %}
+    <!-- ################################################################################################ -->
+    <form action="{{ url_for('new_user') }}" method = "POST" enctype = "multipart/form-data">
+      <div class="full_width clear">
+          <div class="one_half first clear">Please Upload photo with name</div>
+          <div class="one_half"><input type="file" name = "file" /></div>
+      </div>
+      <div class "full_width clear">
+          <input type = "submit" />
+      </div>
+    </form>
     <!-- ################################################################################################ -->
   </div>
 </div>
