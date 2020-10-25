@@ -1,9 +1,9 @@
-opencv-python  
+opencv-python==4.4.0.44  
 
-google-api-python-client 
 google-auth-httplib2==0.0.4 
-google-auth-oauthlib
-google-cloud-storage
+google-api-python-client==1.12.5 
+google-cloud-storage==1.32.0
+google-auth-oauthlib==0.4.1
 
 bump2version==1.0.1
 pip==20.2.4
@@ -35,5 +35,5 @@ waitress==1.4.4
 
 dlib>=19.3.0
 cmake==3.18.2.post1
-matplotlib
+matplotlib==3.3.2
 
