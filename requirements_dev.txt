@@ -1,6 +1,6 @@
 opencv-python==4.4.0.44  
 
-google-api-python-client 
+google-api-python-client==1.12.5 
 google-auth-httplib2 
 google-auth-oauthlib
 google-cloud-storage
