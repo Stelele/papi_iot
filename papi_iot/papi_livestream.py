@@ -40,13 +40,10 @@ def gen(camera):
             unknownPath = unknownPhotoName.split('/')
             unknownPath[-1] = 'old_frame.jpg'
             temp = '/'.join(unknownPath)
-            print("made temp")
             if oldPhotoName != None and os.path.exists(temp):
-                print("temp exists")
                 check_face_send(unknownPhotoName,temp,sendTo,video_index)
                 video_index += 1
             else:
-                print("temp doesnt exits")
                 email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', unknownPhotoName)
 
             if(video_index % 5 == 0):       
