@@ -48,7 +48,10 @@ class PAPIEmail:
                 #flow = InstalledAppFlow.from_client_secrets_file(
                 #    f"{PATH}", SCOPES)
                 #self.creds = flow.run_local_server(port=0)
-                redirect = json.load(PATH)['redirect_uris'][0]
+                with open(PATH, 'r') as f:
+                    redirect = json.load(f)["web"]['redirect_uris'][0]
+                
+                print(redirect)
                 flow = Flow.from_client_secrets_file(PATH, 
                                                     scopes=SCOPES,
                                                     redirect_uri=redirect)

@@ -1,38 +1,25 @@
-# Config file for automatic testing at travis-ci.com
-
 language: python
-
 python:
-  - 3.8
-  - 3.7
-  - 3.6
-
+- 3.8
+- 3.7
+- 3.6
 matrix:
-    fast_finish: true
-
-    allow_failures:
-      - python: 3.8
-      - python: 3.7
-      - python: 3.6
-
+  fast_finish: true
+  allow_failures:
+  - python: 3.8
+  - python: 3.7
+  - python: 3.6
 install:
-  #- pip install -r requirements_dev.txt
-  - pip install -U tox-travis
-
-# Command to run tests, e.g. python setup.py test
+- pip install -r requirements_dev.txt
 script:
-  - tox
-
-# Assuming you have installed the travis-ci CLI tool, after you
-# create the Github repo and add it to Travis, run the
-# following command to finish PyPI deployment setup:
-# $ travis encrypt --add deploy.password
+- travis_wait make test
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: GiftMugweni
+  username:"__token__"
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: fzueQrBtIGksclv+m4aXqsXqr9776fxAOFuXVV7Eua2wUvxuztIepIneuyVkHhGOH+Dh/LtrVkUHzhGpEtIl3dPs9RW5QKWJ2kQZMcIxABs7ft5KQvz/HoYcfCkwYoc8TTINYafXj6F3wYgsLunPf8X5GzqtG8ue1XAXoy1GY8DyXB5EOQAFrUniJ5I0AM1zILOPdvffwpNpsFzAV7Fni0tyR/YQzrkeQ68Pp7Kkrm5OlRK4dVo4qaVh2+UbfwToeoB8HYoYqqIR6djMFaP3ohs69t56XVD6KRM1fmrk8j2KYS816kc+WZpjGSOShgZ5cBG4H5UucApSM0VbRaRmGCuPYyuy4PUeY8IBg8+HT7vP3JrKJ2BXhllkEd/wY5ElIKkQmDKB9TxL3Bby9m1Keo96zYxP7TExXXYPNzvaEc1tAWbpX5DAnBEfU6DNQTgU/os8f9TMRK6q9bZSObIS6hcH8VHHNMZFJRfWtq32lx9aiziYZbId2iM0J96WzfIjo8sM08Dn74Bega630k97sN7zgapQhp/LgK5G0obLlltAacEiV9MO8sEBl6CtkNBnLoMSLFGvC6BsVvBHIONal74oJKL/yJfiVltVSy9KsARSChBNj+0Wt+zh9lHghDRMdWZ6KgWxmEY8TVi/NefgDWvgC/v4JChHEFbOHBhM+Ms=
   on:
     tags: true
     repo: Stelele/papi_iot
