@@ -10,3 +10,17 @@ from os import path
 sys.modules['picamera'] = fake_rpi.picamera
 from papi_iot.papi_iot import PAPIIOT
 
+def photo_dir_creation():
+    papi = PAPIIOT()
+
+    papi.storageManager.offlineStorage.setOfflinePhotoStorageLocation()
+
+    assert path.isdir(papi.storageManager.offlineStorage.getOfflinePhotoStorageLocation('knownFaces')) == True
+    assert path.isdir(papi.storageManager.offlineStorage.getOfflinePhotoStorageLocation('unkownFaces')) == True
+
+def video_dir_creation():
+    papi = PAPIIOT()
+
+    papi.storageManager.offlineStorage.setOfflineVideoStorageLocation()
+
+    assert path.isdir(papi.storageManager.offlineStorage.getOfflineVideoStorageLocation()) == True
