@@ -22,3 +22,17 @@ def test_video_dir_creation():
     papi = PAPIIOT()
     papi.storageManager.offlineStorage.setOfflineVideoStorageLocation()
     assert path.isdir(papi.storageManager.offlineStorage.getOfflineVideoStorageLocation()) == True
+
+def test_store_known_user():
+    papi = PAPIIOT()
+
+    papi.storageManager.offlineStorage.setOfflinePhotoStorageLocation()
+
+    papi.storageManager.offlineStorage.storeNewKnownUser('./sample_pic/morgan.jpg')
+
+    location = papi.storageManager.offlineStorage.getOfflinePhotoStorageLocation() + '/morgan.jpg'
+
+    assert path.isfile(location) == True
+
+
+
