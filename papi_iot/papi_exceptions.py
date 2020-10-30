@@ -37,3 +37,14 @@ class NoBlobsFound(Exception):
         self.message = "No files found in storage bucket"
 
         super().__init__(self.message)
+
+class DirectoryCreationFail(Exception):
+    """
+        Exception raised when folder creation failed
+
+    """
+
+    def __init__(self, dir):
+        self.message = "Directory '{}' can not be created".format(dir)
+
+        super().__init__(self.message)

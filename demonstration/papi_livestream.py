@@ -3,12 +3,11 @@ from operator import index
 print("Setting Flask")
 from flask import Flask, render_template, Response, request
 print("Getting Face Recognition")
-from papi_face_recognition import PapiFaceRecognition
+from papi_iot.papi_face_recognition import PapiFaceRecognition
 print("Setting Storage")
-from papi_storage_offline import OfflineStorage
+from papi_iot.papi_storage_offline import OfflineStorage
 from papi_email import PAPIEmail
 from shutil import copy
-import time
 import os
 import face_recognition
 
