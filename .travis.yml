@@ -7,11 +7,10 @@ python:
 install:
 - pip install -r requirements_dev.txt
 script:
-- travis_wait make test
+- travis_wait pytest
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
-  user: GiftMugweni
   username: "__token__"
   password:
     secure: "fzueQrBtIGksclv+m4aXqsXqr9776fxAOFuXVV7Eua2wUvxuztIepIneuyVkHhGOH+Dh/LtrVkUHzhGpEtIl3dPs9RW5QKWJ2kQZMcIxABs7ft5KQvz/HoYcfCkwYoc8TTINYafXj6F3wYgsLunPf8X5GzqtG8ue1XAXoy1GY8DyXB5EOQAFrUniJ5I0AM1zILOPdvffwpNpsFzAV7Fni0tyR/YQzrkeQ68Pp7Kkrm5OlRK4dVo4qaVh2+UbfwToeoB8HYoYqqIR6djMFaP3ohs69t56XVD6KRM1fmrk8j2KYS816kc+WZpjGSOShgZ5cBG4H5UucApSM0VbRaRmGCuPYyuy4PUeY8IBg8+HT7vP3JrKJ2BXhllkEd/wY5ElIKkQmDKB9TxL3Bby9m1Keo96zYxP7TExXXYPNzvaEc1tAWbpX5DAnBEfU6DNQTgU/os8f9TMRK6q9bZSObIS6hcH8VHHNMZFJRfWtq32lx9aiziYZbId2iM0J96WzfIjo8sM08Dn74Bega630k97sN7zgapQhp/LgK5G0obLlltAacEiV9MO8sEBl6CtkNBnLoMSLFGvC6BsVvBHIONal74oJKL/yJfiVltVSy9KsARSChBNj+0Wt+zh9lHghDRMdWZ6KgWxmEY8TVi/NefgDWvgC/v4JChHEFbOHBhM+Ms="
