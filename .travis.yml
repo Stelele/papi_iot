@@ -7,7 +7,7 @@ python:
 install:
 - pip install -r requirements_dev.txt
 script:
-- travis_wait pytest
+- travis_wait pytest tests/test_papi_iot.py
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
