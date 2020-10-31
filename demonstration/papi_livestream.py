@@ -3,12 +3,11 @@ from operator import index
 print("Setting Flask")
 from flask import Flask, render_template, Response, request
 print("Getting Face Recognition")
-from papi_face_recognition import PapiFaceRecognition
+from papi_iot.papi_face_recognition import PapiFaceRecognition
 print("Setting Storage")
-from papi_storage_offline import OfflineStorage
+from papi_iot.papi_storage_offline import OfflineStorage
 from papi_email import PAPIEmail
 from shutil import copy
-import time
 import os
 import face_recognition
 
@@ -61,7 +60,7 @@ def video_feed():
 
 @app.route('/show_video')
 def show_video():
-    email.getCredentials('./client_secret_email.json')
+    email.getCredentials('client_secret_email.json')
     if request.method == 'POST':
         return render_template('video_feed.html')
 
@@ -93,7 +92,7 @@ def remove_user():
     return render_template('remove_user.html')
 
 
-def check_face_send(newpictureName,oldPicture, sendTo,video_index, skipFor=10):
+def check_face_send(newpictureName,oldPicture, sendTo,video_index, skipFor=5):
     if(video_index % skipFor == 0): 
         print("comparing old and new")
         newImage = face_recognition.load_image_file(newpictureName)
@@ -107,6 +106,7 @@ def check_face_send(newpictureName,oldPicture, sendTo,video_index, skipFor=10):
             oldEncording = oldEncording[0]
             results = face_recognition.compare_faces([newEncording], oldEncording)
             print("checking to send email")
+            print("New Old results :{}", results)
             if not (True in results):
                 email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', newpictureName)
 

@@ -3,7 +3,7 @@ import os
 import cv2
 import time
 import numpy as np
-from papi_storage_offline import OfflineStorage
+from papi_iot.papi_storage_offline import OfflineStorage
 import random
 
 class PapiFaceRecognition (object):
@@ -131,7 +131,7 @@ class PapiFaceRecognition (object):
         #print(len(known_face_encodings))
         #print(known_names)
 
-    def getFrame (self, processEvery=10):
+    def getFrame (self, processEvery=5):
         success, image = self.video.read()
         unknownPhotoName = None
         #self.process_this_frame = True

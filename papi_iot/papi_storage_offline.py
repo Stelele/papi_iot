@@ -4,6 +4,7 @@ from os import listdir
 from os import makedirs
 from os import path
 from matplotlib import image
+from papi_iot.papi_exceptions import DirectoryCreationFail
 
 class OfflineStorage (object):
     rootDir = 'home/pi'
@@ -26,28 +27,14 @@ class OfflineStorage (object):
         if (path.isdir(pathKnownFaces) == False):
             try: 
                 makedirs(pathKnownFaces,exist_ok = True)
-                print("Directory '%s' created successfully" %pathKnownFaces) 
-            except OSError as error: 
-                print("Directory '%s' can not be created") 
-            
+            except OSError: 
+                raise DirectoryCreationFail(pathKnownFaces)
+
         if (path.isdir(pathUknownFaces) == False):
             try: 
                 makedirs(pathUknownFaces,exist_ok = True)
-                print("Directory '%s' created successfully" %pathUknownFaces) 
-            except OSError as error: 
-                print("Directory '%s' can not be created")
-
-    #def setOfflinePhotoStorageNameLabelLocation(self, name)
-    #    '''
-    #        Create subfolders for name labels
-    #        args:
-    #            name (string): label of known user 
-    #    '''
-    #    self.nameLabel = name
-    #    makedirs(rootDir + '/photos' +  knownFaces + nameLabel)
-    
-    #def getOfflinePhotoStorageNameLabelLocation(self):
-    #    return '.' + self.rootDir + '/photos' + self.knownFaces + self.nameLabel
+            except OSError: 
+                raise DirectoryCreationFail(pathUknownFaces)
 
     def getOfflinePhotoStorageLocation(self, category):
         if category == 'knownFaces':
@@ -60,9 +47,11 @@ class OfflineStorage (object):
         if (path.isdir(pathVideos) == False):
             try: 
                 makedirs(pathVideos, exist_ok = True)
-                print("Directory '%s' created successfully" %pathVideos) 
             except OSError as error: 
-                print("Directory '%s' can not be created")
+                raise DirectoryCreationFail(pathVideos)
+    
+    def getOfflineVideoStorageLocation(self):
+        return self.rootDir + '/videos'
 
     def storeOfflinePhotos(self, filename, destination):
         """
