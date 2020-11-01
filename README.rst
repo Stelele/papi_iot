@@ -36,17 +36,6 @@ Features
 Build Status
 ------------
 
-## Step 1 – Install dLib Library & Face recognition Library & opencv-python
-
-## Step 2 - Clone the papi_iot
-Open up terminal and clone the papi_iot repo:
-
-.. highlight:: bash
-
-:: 
-   $ cd /home/pi
-   $ git clone https://github.com/Stelele/papi_iot
-
 Quick Start
 -----------
 
