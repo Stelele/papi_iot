@@ -219,11 +219,28 @@ class PapiFaceRecognition (object):
             self.video.release()
             cv2.destroyAllWindows()
 
-if __name__ == "__main__":
-    unit = PapiFaceRecognition()
+    def checkSamePerson(self, photoOneLocation, photoTwoLocation):
+        """
 
-    # unit.faceRecognitionFromPhoto()
-    unit.faceRecognitionFromVideo()
+            This method checks if the same person appears in two photos
 
+        """
+
+        result = False
+
+        imageOne = face_recognition.load_image_file(photoOneLocation)
+        imageTwo = face_recognition.load_image_file(photoTwoLocation)
+
+        oneEncording = face_recognition.face_encodings(imageOne)
+        twoEncording = face_recognition.face_encodings(imageTwo)
+
+        if(len(oneEncording)>0 and len(twoEncording)> 0):
+            oneEncording = oneEncording[0]
+            twoEncording = twoEncording[0]
+            results = face_recognition.compare_faces([oneEncording], twoEncording)
+
+            result = True in results
+
+        return result
 
     

@@ -9,7 +9,6 @@ from papi_iot.papi_storage_offline import OfflineStorage
 from papi_email import PAPIEmail
 from shutil import copy
 import os
-import face_recognition
 
 print("Setting variables")
 app = Flask(__name__)
@@ -95,20 +94,11 @@ def remove_user():
 def check_face_send(newpictureName,oldPicture, sendTo,video_index, skipFor=5):
     if(video_index % skipFor == 0): 
         print("comparing old and new")
-        newImage = face_recognition.load_image_file(newpictureName)
-        oldImage = face_recognition.load_image_file(oldPicture)
-
-        newEncording = face_recognition.face_encodings(newImage)
-        oldEncording = face_recognition.face_encodings(oldImage)
-
-        if(len(newEncording)>0 and len(oldEncording)> 0):
-            newEncording = newEncording[0]
-            oldEncording = oldEncording[0]
-            results = face_recognition.compare_faces([newEncording], oldEncording)
-            print("checking to send email")
-            print("New Old results :{}", results)
-            if not (True in results):
-                email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', newpictureName)
+        
+        checkMatch = PapiFaceRecognition.checkSamePerson(newpictureName, oldPicture)
+        if not checkMatch:
+            print("Sending email")
+            email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', newpictureName)
 
 if __name__ == '__main__':
     from waitress import serve
