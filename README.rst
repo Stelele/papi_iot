@@ -28,17 +28,40 @@ An API for home security system using raspberry Pi with Pi IR camera and facial 
 Features
 --------
 
-* TODO
+* Surveillance Security
+* Pi camera live stream 
+* Facial recognition 
+* Storage Management: SD card memory and Google cloud storage
+* Email notifications
 
 Build Status
 ------------
 
-*TODO
+## Step 1 – Install dLib Library & Face recognition Library
+
+## Step 2 - Clone the papi_iot
+Open up terminal and clone the papi_iot repo:
+
+```
+bash cd /home/pi
+git clone https://github.com/Stelele/papi_iot
+```
 
 Quick Start
 -----------
 
-* TODO
+## Pre-requisite
+
+* Minimum Raspberry Pi 0 w, 2GB is recommended for optimal Face recognition performance
+* [OpenCV face-recognition](https://github.com/ageitgey/face_recognition)
+* Raspberry Pi V2 Camera Module 
+* Python 3 recommended.
+
+## Start
+
+```bash cd papi_iot
+sudo python3 /papi_iot/papi_iot/papi_livestream.py
+```
 
 Credits
 -------
