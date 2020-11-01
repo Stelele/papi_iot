@@ -41,10 +41,11 @@ Build Status
 ## Step 2 - Clone the papi_iot
 Open up terminal and clone the papi_iot repo:
 
-```
-bash cd /home/pi
-git clone https://github.com/Stelele/papi_iot
-```
+.. highlight:: bash
+
+:: 
+   $ cd /home/pi
+   $ git clone https://github.com/Stelele/papi_iot
 
 Quick Start
 -----------
@@ -58,9 +59,10 @@ Quick Start
 
 ## Test module by running 
 
-```bash cd papi_iot
-sudo python3 /papi_iot/papi_iot/papi_face_recognition.py
-```
+::
+   $ cd papi_iot
+   $ sudo python3 /papi_iot/papi_iot/papi_face_recognition.py
+
 Tests storage management, face recognition from photos and videos
 Credits
 -------
