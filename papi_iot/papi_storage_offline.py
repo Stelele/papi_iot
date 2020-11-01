@@ -8,7 +8,6 @@ from matplotlib import image
 class OfflineStorage (object):
     rootDir = 'home/pi'
     knownFaces = '/knownFaces'
-    # nameLabel = '/name'
     unknownFaces = '/unknownFaces'
 
     def __init__(self):
@@ -20,6 +19,11 @@ class OfflineStorage (object):
         self.setOfflineVideoStorageLocation()
         
     def setOfflinePhotoStorageLocation(self):
+        """
+            Create the locations/folders for the known faces images and unknown faces images. 
+            Paths created are /home/pi/photos/knownFaces and /home/pi/photos/unknownFaces 
+        """
+
         pathKnownFaces = self.rootDir + '/photos' +  self.knownFaces
         pathUknownFaces = self.rootDir + '/photos' +  self.unknownFaces
         
@@ -37,25 +41,29 @@ class OfflineStorage (object):
             except OSError as error: 
                 print("Directory '%s' can not be created")
 
-    #def setOfflinePhotoStorageNameLabelLocation(self, name)
-    #    '''
-    #        Create subfolders for name labels
-    #        args:
-    #            name (string): label of known user 
-    #    '''
-    #    self.nameLabel = name
-    #    makedirs(rootDir + '/photos' +  knownFaces + nameLabel)
-    
-    #def getOfflinePhotoStorageNameLabelLocation(self):
-    #    return '.' + self.rootDir + '/photos' + self.knownFaces + self.nameLabel
-
     def getOfflinePhotoStorageLocation(self, category):
+        """
+            Obtain the path to known and unknown faces based on given category.
+
+            Parameters
+            ----------
+            category : str
+                Path choice. Can either be knownFaces or unknownFaces
+
+            Returns
+            -------
+            Path : str
+                Can either be path to knownFaces or unknownFaces folder
+        """
         if category == 'knownFaces':
             return './' + self.rootDir + '/photos' + self.knownFaces
         else: 
             return './' + self.rootDir + '/photos' + self.unknownFaces
 
     def setOfflineVideoStorageLocation(self):
+        """
+            Create the locations/folder for videos. Path to video /home/pi/videos
+        """
         pathVideos = self.rootDir + '/videos'
         if (path.isdir(pathVideos) == False):
             try: 
@@ -69,8 +77,10 @@ class OfflineStorage (object):
             Store photos from pi camera into the given folder
 
             args:
-                filename (string): filename for image
-                destination (string): location to store image
+                filename : str
+                    filename for image
+                destination : str
+                    location to store image
         """
         copy(filename, destination)
 
@@ -79,7 +89,8 @@ class OfflineStorage (object):
             Store video from pi camera into the given video folder
 
             args:
-                filename (string): filename for video
+                filename : str
+                    filename for video
         """
         copy(filename, self.rootDir + '/videos')
 
@@ -88,7 +99,8 @@ class OfflineStorage (object):
             Obtain photo based on destination given.
 
             args: 
-                destination (string): filename for image
+                destination : str
+                    filename for image
             
             return:
                 image as pixel array
@@ -100,8 +112,10 @@ class OfflineStorage (object):
             Obtain all photos from both knownFaces and unknownFace folders
 
             return:
-                knownFacesImageList (list): known faces image pixel array list
-                unknownFacesImageList (list): unknown faces image pixel array list
+                knownFacesImageList : list
+                    known faces image pixel array list
+                unknownFacesImageList : list
+                    unknown faces image pixel array list
         """
         knownFacesImageList = list()
         unknownFacesImageList = list()
@@ -116,6 +130,14 @@ class OfflineStorage (object):
         return knownFacesImageList, unknownFacesImageList
 
     def getOfflinesVideo(self):
+        """
+            Obtain list of vides in video folder
+
+            Returns
+            -------
+            videoList : list
+                list of videos 
+        """
         videoList = list()
         for filename in listdir('./' + self.rootDir + '/videos'):
             videoData = image.imread('./' + self.rootDir + '/videos' + '/' + filename)
@@ -124,13 +146,42 @@ class OfflineStorage (object):
         return videoList
 
     def storeNewKnownUser(self, filename):
+        """
+            Store the new known person in the knownFaces folder. 
+        """
         self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces') + '/' + filename)
 
     def removeKnownUser(self, userName):
+        """
+            Remove the new known person in the knownFaces folder.
+
+            Parameters
+            ----------
+            userName : str
+                Name of the person to be removed
+
+            Returns
+            -------
+            filename : bool
+                removed file True or False
+        """
         fileName = self.getOfflinePhotoStorageLocation('knownFaces') + '/' + userName + '.jpg'
         return self.removeFile(fileName)
 
     def removeFile(self, fileName):
+        """
+            Remove the file from given file name
+
+            Parameters
+            ----------
+            filename : str
+                remove file named filename  
+
+            Returns
+            -------
+            removed : bool
+                removed file True or False
+        """
         removed = False
 
         if os.path.exists(fileName):
