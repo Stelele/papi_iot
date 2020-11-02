@@ -12,6 +12,8 @@ class PapiFaceRecognition (object):
             Initial state of the object by assigning the values of the object’s properties
         """
         fn = OfflineStorage ()
+        fn.setOfflinePhotoStorageLocation()
+        fn.setOfflineVideoStorageLocation()
         self.known_faces_dir = fn.getOfflinePhotoStorageLocation('knownFaces')  
         self.unknown_faces_dir = fn.getOfflinePhotoStorageLocation('unknownFaces')  
         self.tolerance = 0.6
@@ -204,7 +206,7 @@ class PapiFaceRecognition (object):
 
         try:
             while True:
-                ret, frame = self.getFrame ()
+                ret, frame, unknownPhotoName = self.getFrame ()
                 # Display the resulting image
                 cv2.imshow('video', frame)
 

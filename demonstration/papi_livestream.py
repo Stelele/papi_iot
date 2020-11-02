@@ -13,6 +13,7 @@ import os
 print("Setting variables")
 app = Flask(__name__)
 email = PAPIEmail()
+papiFAceRecognition = PapiFaceRecognition()
 
 print("Got Email Credentails")
 offlineStorage = OfflineStorage()
@@ -95,7 +96,8 @@ def check_face_send(newpictureName,oldPicture, sendTo,video_index, skipFor=5):
     if(video_index % skipFor == 0): 
         print("comparing old and new")
         
-        checkMatch = PapiFaceRecognition.checkSamePerson(newpictureName, oldPicture)
+        checkMatch = papiFAceRecognition.checkSamePerson(newpictureName, oldPicture)
+        
         if not checkMatch:
             print("Sending email")
             email.send_message('me',sendTo,'Unknown User Spotted','Suspicious user was noticed at your premises', newpictureName)
