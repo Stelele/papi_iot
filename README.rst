@@ -33,7 +33,7 @@ Features
 Build Status
 ------------
 
-*TODO
+* TODO
 
 Quick Start
 -----------

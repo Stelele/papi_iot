@@ -1,38 +1,17 @@
-# Config file for automatic testing at travis-ci.com
-
 language: python
-
 python:
-  - 3.8
-  - 3.7
-  - 3.6
-
-matrix:
-    fast_finish: true
-
-    allow_failures:
-      - python: 3.8
-      - python: 3.7
-      - python: 3.6
-
+- 3.8
+- 3.7
+- 3.6
 install:
-  #- pip install -r requirements_dev.txt
-  - pip install -U tox-travis
-
-# Command to run tests, e.g. python setup.py test
+- pip install -r requirements_dev.txt
 script:
-  - tox
-
-# Assuming you have installed the travis-ci CLI tool, after you
-# create the Github repo and add it to Travis, run the
-# following command to finish PyPI deployment setup:
-# $ travis encrypt --add deploy.password
+- travis_wait pytest tests/test_papi_iot.py
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
-  user: GiftMugweni
-  password:
-    secure: PLEASE_REPLACE_ME
+  username: __token__
+  password: pypi-AgEIcHlwaS5vcmcCJGVhNWU3YTZhLTQ5NmQtNDY4Yi1iOGRjLTA5Y2I2OTExNjNjOAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgO_frszCe6ZpqfuLzJYynoJf5EiYPx8es3yAbWBUKT4A
   on:
     tags: true
     repo: Stelele/papi_iot

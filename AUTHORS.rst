@@ -6,6 +6,7 @@ Development Lead
 ----------------
 
 * Gift Mugweni <giftmugweni@gmail.com>
+* Oyama Plati <PLTOYA001@myuct.ac.za>
 
 Contributors
 ------------

@@ -3,7 +3,7 @@ import os
 import cv2
 import time
 import numpy as np
-from papi_storage_offline import OfflineStorage
+from papi_iot.papi_storage_offline import OfflineStorage
 import random
 
 class PapiFaceRecognition (object):
@@ -146,7 +146,7 @@ class PapiFaceRecognition (object):
             except Exception as e:
                 pass
 
-    def getFrame (self):
+    def getFrame (self, processEvery=5):
         """
         Compute facial recognition on image frame. Draw box around target face and label the face. 
 
@@ -171,7 +171,7 @@ class PapiFaceRecognition (object):
         rgb_small_frame = small_frame[:, :, ::-1]
         
         # Only process every other frame of video to save time
-        if self.process_this_frame % 10 == 0:
+        if self.process_this_frame % processEvery == 0:
             # Find all the faces and face encodings in the current frame of video
             self.locations = face_recognition.face_locations(rgb_small_frame)
             self.encodings = face_recognition.face_encodings(rgb_small_frame, self.locations)
@@ -249,11 +249,28 @@ class PapiFaceRecognition (object):
             self.video.release()
             cv2.destroyAllWindows()
 
-if __name__ == "__main__":
-    unit = PapiFaceRecognition()
+    def checkSamePerson(self, photoOneLocation, photoTwoLocation):
+        """
 
-    # unit.faceRecognitionFromPhoto()
-    unit.faceRecognitionFromVideo()
+            This method checks if the same person appears in two photos
 
+        """
+
+        result = False
+
+        imageOne = face_recognition.load_image_file(photoOneLocation)
+        imageTwo = face_recognition.load_image_file(photoTwoLocation)
+
+        oneEncording = face_recognition.face_encodings(imageOne)
+        twoEncording = face_recognition.face_encodings(imageTwo)
+
+        if(len(oneEncording)>0 and len(twoEncording)> 0):
+            oneEncording = oneEncording[0]
+            twoEncording = twoEncording[0]
+            results = face_recognition.compare_faces([oneEncording], twoEncording)
+
+            result = True in results
+
+        return result
 
     

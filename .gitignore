@@ -108,4 +108,7 @@ ENV/
 **/client_secret_email.json
 **/token.pickle
 **/Shinga*
+
 **/James*
+**/papi-iot-credentials.json
+
