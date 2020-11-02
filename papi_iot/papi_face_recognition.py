@@ -11,9 +11,9 @@ class PapiFaceRecognition (object):
         """
             Initial state of the object by assigning the values of the object’s properties
         """
-        fn = OfflineStorage ()
-        self.known_faces_dir = fn.getOfflinePhotoStorageLocation('knownFaces')  
-        self.unknown_faces_dir = fn.getOfflinePhotoStorageLocation('unknownFaces')  
+        offlineStorage = OfflineStorage ()
+        self.known_faces_dir = offlineStorage.getOfflinePhotoStorageLocation('knownFaces')  
+        self.unknown_faces_dir = offlineStorage.getOfflinePhotoStorageLocation('unknownFaces')  
         self.tolerance = 0.6
         self.frame_thickness = 3
         self.font_thickness = 2
@@ -30,12 +30,27 @@ class PapiFaceRecognition (object):
         self.loadImages ()
 
     def nameToColor (self, name):
-        # Take 3 first letters, tolower()
-        # lowercased character ord() value rage is 97 to 122, substract 97, multiply by 8
+        """
+        Get color by name. Take 3 first letters, tolower(). Lowercased character ord() value rage is 97 to 122, 
+        substract 97, multiply by 8.
+
+        Parameters
+        ----------
+        name : str
+            name of known face
+
+        Returns
+        -------
+        color : str
+            color based on the name of known person
+        """
         color = [(ord(c.lower()) - 97) * 8 for c in name[:3]]
         return color
     
     def faceRecognitionFromPhoto (self):
+        """
+        Perform facial recognition from photos
+        """
         print('Loading known faces...')
         # We oranize known faces as subfolders of known_faces_dir
         # Each subfolder's name becomes our label (name)
@@ -114,6 +129,9 @@ class PapiFaceRecognition (object):
             cv2.destroyWindow(file)
 
     def loadImages (self):
+        """
+        Add images fron known faces folder to the known names and known faces lists
+        """
         #Loop to add images in friends folder
         for file in os.listdir(self.known_faces_dir):
             try:
@@ -127,11 +145,21 @@ class PapiFaceRecognition (object):
 
             except Exception as e:
                 pass
-            
-        #print(len(known_face_encodings))
-        #print(known_names)
 
     def getFrame (self, processEvery=5):
+        """
+        Compute facial recognition on image frame. Draw box around target face and label the face. 
+
+        Returns
+        -------
+        jpeg.tobytes() : bytestring
+            images memory buffer
+        image : img
+            compressed image
+        unknownPhotoName : str
+            label of unknown person face
+        """
+
         success, image = self.video.read()
         unknownPhotoName = None
         #self.process_this_frame = True
@@ -201,7 +229,9 @@ class PapiFaceRecognition (object):
         return jpeg.tobytes(), image, unknownPhotoName
 
     def faceRecognitionFromVideo (self):
-
+        """
+        Compute facial recognition from video.
+        """
         try:
             while True:
                 ret, frame = self.getFrame ()
