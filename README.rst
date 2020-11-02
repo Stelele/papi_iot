@@ -39,20 +39,27 @@ Build Status
 Quick Start
 -----------
 
-## Pre-requisite
+Pre-requisite
+^^^^^^^^^^^^^^^^
 
 * Minimum Raspberry Pi 0 w, 2GB is recommended for optimal Face recognition performance
 * [OpenCV face-recognition](https://github.com/ageitgey/face_recognition)
 * Raspberry Pi V2 Camera Module 
 * Python 3 recommended.
 
-## Test module by running 
+Test module by running 
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
-   $ cd papi_iot
-   $ sudo python3 /papi_iot/papi_iot/papi_face_recognition.py
+Test module by executing::
 
-Tests storage management, face recognition from photos and videos
+    >>> from papi_iot.papi_face_recognition import PapiFaceRecognition
+    >>> test = PapiFaceRecognition()
+    >>> test.faceRecognitionFromVideo()
+
+This Tests storage management and face recognition from videos
+
+To end program use 'Ctl'+'C' command
+
 Credits
 -------
 
