@@ -38,5 +38,5 @@ waitress==1.4.4
 dlib>=19.3.0
 cmake==3.18.2.post1
 matplotlib==3.3.2
-fake-rpi
+fake-rpi==0.7.1
 
