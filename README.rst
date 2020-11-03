@@ -81,6 +81,6 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 .. _Dlib: https://www.pyimagesearch.com/2017/05/01/install-dlib-raspberry-pi/
 .. _OpenCV: https://www.learnopencv.com/install-opencv-4-on-raspberry-pi/
 .. _`Raspberry Pi V2 Camera Module`: https://za.rs-online.com/web/p/raspberry-pi-cameras/9132673/
-.. _`Google Cloud Storage Account`: https://cloud.google.com/storage/docs/reference/libraries
+.. _`Google Cloud Storage Severice Account`: https://cloud.google.com/storage/docs/reference/libraries
 .. _requirements: https://github.com/Stelele/papi_iot/blob/master/requirements.txt
 .. _`picamera Library`: https://picamera.readthedocs.io/en/release-1.13/
