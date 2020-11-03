@@ -1,4 +1,5 @@
 import os
+import glob
 from shutil import copy
 from os import listdir
 from os import makedirs
@@ -151,7 +152,35 @@ class OfflineStorage (object):
         """
             Store the new known person in the knownFaces folder. 
         """
-        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces') + '/' + filename)
+        newFileName = filename.split('/')[-1]
+        self.storeOfflinePhotos(filename,self.getOfflinePhotoStorageLocation('knownFaces') + '/' + newFileName)
+
+    def storeNewKnownUsers(self, sourceFolder, picType='.jpg'):
+        """
+
+            Store known photos in known Faces folder
+
+        """
+
+        picLocationList = glob.glob(sourceFolder + '/' + picType)
+
+        for picLocation in picLocationList:
+            self.storeNewKnownUser(picLocation)
+
+
+    def storeUnknownPhotos(self, sourceFolder, picType='.jpg'):
+        """
+
+            store unknown photos in unknown folder
+
+        """
+
+        picLocationList = glob.glob(sourceFolder + '/*' + picType)
+
+        for picLocation in picLocationList:
+            name = picLocation.split('/')[-1]
+            newLocation = self.getOfflinePhotoStorageLocation('unknown') + '/' + name
+            self.storeOfflinePhotos(picLocation, newLocation)
 
     def removeKnownUser(self, userName):
         """

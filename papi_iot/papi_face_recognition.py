@@ -13,8 +13,6 @@ class PapiFaceRecognition (object):
         """
 
         offlineStorage = OfflineStorage ()
-        offlineStorage.setOfflinePhotoStorageLocation()
-        offlineStorage.setOfflineVideoStorageLocation()
         self.known_faces_dir = offlineStorage.getOfflinePhotoStorageLocation('knownFaces')  
         self.unknown_faces_dir = offlineStorage.getOfflinePhotoStorageLocation('unknownFaces')  
         self.tolerance = 0.6
@@ -238,6 +236,26 @@ class PapiFaceRecognition (object):
         """
         try:
             while True:
+                ret, frame, unknownPhotoName = self.getFrame ()
+                # Display the resulting image
+                cv2.imshow('video', frame)
+
+                # Hit 'q' on the keyboard to quit!
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+        except KeyboardInterrupt:
+            pass
+        finally:
+            # Release handle to the webcam
+            self.video.release()
+            cv2.destroyAllWindows()
+
+    def faceRecognitionFromVideoFile(self, fileLocation):
+        self.video = cv2.VideoCapture(fileLocation)
+
+        try:
+            while self.video.isOpened():
                 ret, frame, unknownPhotoName = self.getFrame ()
                 # Display the resulting image
                 cv2.imshow('video', frame)
