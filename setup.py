@@ -47,6 +47,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/Stelele/papi_iot',
-    version='3.7.7',
+    version='3.7.8',
     zip_safe=False,
 )
