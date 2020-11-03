@@ -1,11 +1,3 @@
-.. toctree::
-    :glob:
-
-    Offline Storage Operations <offline.rst>
-    Online Storage Operations  <online.rst>
-    Camera Video Operations    <camera.rst>
-    Facial Recognition Operations <recognition.rst>
-
 =====
 Usage
 =====
@@ -20,7 +12,13 @@ To use entire PAPI IOT features at once do the following::
     papi = PAPIIOT()
 
 
+.. toctree::
+    :glob:
 
+    Offline Storage Operations <offline.rst>
+    Online Storage Operations  <online.rst>
+    Camera Video Operations    <camera.rst>
+    Facial Recognition Operations <recognition.rst>
     
     
 
