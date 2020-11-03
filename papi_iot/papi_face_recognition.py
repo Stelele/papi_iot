@@ -190,10 +190,11 @@ class PapiFaceRecognition (object):
                 #print(face_encoding)
                 print(matches)
 
-                face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
-                best_match_index = np.argmin(face_distances)
-                if matches[best_match_index]:
-                    name = self.known_names[best_match_index]
+                if len(matches) >0:
+                    face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
+                    best_match_index = np.argmin(face_distances)
+                    if matches[best_match_index]:
+                        name = self.known_names[best_match_index]
 
                 print(name)
                 # This is how I SAVE face profiles from unknown people
@@ -276,4 +277,3 @@ class PapiFaceRecognition (object):
 
         return result
 
-    
