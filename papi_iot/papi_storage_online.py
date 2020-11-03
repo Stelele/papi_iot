@@ -1,5 +1,6 @@
 from google.cloud import storage
 from papi_iot.papi_exceptions import BlobNotFound, NoBlobsFound
+from google.cloud.exceptions import NotFound
 import glob
 
 class OnlineStorage:
@@ -29,9 +30,15 @@ class OnlineStorage:
 
         self.onlineStorageCredentials = storage.Client.from_service_account_json(credentialsFile)
 
-        self.photoBucket = self.onlineStorageCredentials.get_bucket(self.onlinePhotoStorageLocation)
-        self.videoBucket = self.onlineStorageCredentials.get_bucket(self.onlineVideoStorageLocation)
+        try:
+            self.photoBucket = self.onlineStorageCredentials.get_bucket(self.onlinePhotoStorageLocation)
+        except NotFound:
+            self.photoBucket = self.onlineStorageCredentials.create_bucket(self.onlinePhotoStorageLocation)
 
+        try:
+            self.videoBucket = self.onlineStorageCredentials.get_bucket(self.onlineVideoStorageLocation)
+        except NotFound:
+            self.videoBucket = self.onlineStorageCredentials.create_bucket(self.onlineVideoStorageLocation)
 
     def setOnlinePhotoStorageLocation(self, photoLocation):
         """
@@ -42,9 +49,14 @@ class OnlineStorage:
                 photoLocation -- name of bucket to store photos created in console
 
         """
-        self.onlinePhotoStorageLocation = photoLocation
-        self.photoBucket = self.onlineStorageCredentials.get_bucket(self.onlinePhotoStorageLocation)
 
+        self.onlinePhotoStorageLocation = photoLocation
+
+        try:
+            self.photoBucket = self.onlineStorageCredentials.get_bucket(self.onlinePhotoStorageLocation)
+        except NotFound:
+            self.photoBucket = self.onlineStorageCredentials.create_bucket(self.onlinePhotoStorageLocation)
+            
     def setOnlineVideoStorageLocation(self, videoLocation):
         """
 
@@ -55,7 +67,10 @@ class OnlineStorage:
 
         """
         self.onlineVideoStorageLocation = videoLocation
-        self.videoBucket = self.onlineStorageCredentials.get_bucket(self.onlineVideoStorageLocation)
+        try:
+            self.videoBucket = self.onlineStorageCredentials.get_bucket(self.onlineVideoStorageLocation)
+        except NotFound:
+            self.videoBucket = self.onlineStorageCredentials.create_bucket(self.onlineVideoStorageLocation)
 
     def storeOnlinePhotos(self, folderLocation, picType='.jpg', approvedUser=True):
         """
@@ -63,6 +78,7 @@ class OnlineStorage:
             Upload all photos in a location to the photoLocation bucket
             --------------------------------------------------------------------
             Variables
+
                 folderLocation -- folder location containing photos to be uploaded
                 picType -- default '.jpg' picture file format to be uploaded
                 approvedUser -- default True, if True photos marked as approved users if false, photos marked as banned users

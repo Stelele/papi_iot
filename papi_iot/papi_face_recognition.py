@@ -13,8 +13,6 @@ class PapiFaceRecognition (object):
         """
 
         offlineStorage = OfflineStorage ()
-        offlineStorage.setOfflinePhotoStorageLocation()
-        offlineStorage.setOfflineVideoStorageLocation()
         self.known_faces_dir = offlineStorage.getOfflinePhotoStorageLocation('knownFaces')  
         self.unknown_faces_dir = offlineStorage.getOfflinePhotoStorageLocation('unknownFaces')  
         self.tolerance = 0.6
@@ -190,10 +188,11 @@ class PapiFaceRecognition (object):
                 #print(face_encoding)
                 print(matches)
 
-                face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
-                best_match_index = np.argmin(face_distances)
-                if matches[best_match_index]:
-                    name = self.known_names[best_match_index]
+                if len(matches) >0:
+                    face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
+                    best_match_index = np.argmin(face_distances)
+                    if matches[best_match_index]:
+                        name = self.known_names[best_match_index]
 
                 print(name)
                 # This is how I SAVE face profiles from unknown people
@@ -252,6 +251,26 @@ class PapiFaceRecognition (object):
             self.video.release()
             cv2.destroyAllWindows()
 
+    def faceRecognitionFromVideoFile(self, fileLocation):
+        self.video = cv2.VideoCapture(fileLocation)
+
+        try:
+            while self.video.isOpened():
+                ret, frame, unknownPhotoName = self.getFrame ()
+                # Display the resulting image
+                cv2.imshow('video', frame)
+
+                # Hit 'q' on the keyboard to quit!
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+        except KeyboardInterrupt:
+            pass
+        finally:
+            # Release handle to the webcam
+            self.video.release()
+            cv2.destroyAllWindows()
+
     def checkSamePerson(self, photoOneLocation, photoTwoLocation):
         """
 
@@ -276,4 +295,3 @@ class PapiFaceRecognition (object):
 
         return result
 
-    
