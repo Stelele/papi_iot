@@ -3,7 +3,7 @@ Face Recognition Operations
 ==============================
 
 Instatiating photos in database
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 To load unknown faces to categorise::
 
@@ -14,7 +14,7 @@ To load known faces to database::
     papi.offlineStorage.storeNewKnownUsers('/source/folder/location')
 
 Facial Recognition from photos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 To categorise faces in the unknown faces folder::
 
@@ -25,7 +25,7 @@ To compare if the same user is in the same photo::
     papi.faceRecognition.checkSamePerson('/first/photo/location/name1.jpg', '/second/photo/location/name2.jpg')
 
 Facial Recognition from videos
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 To recognise faces from a live video feed::
 
