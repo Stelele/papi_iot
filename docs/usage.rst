@@ -1,6 +1,6 @@
 .. toctree::
- :maxdepth: 3
- :numbered:
+    :maxdepth: 3
+    :numbered:
 
 =====
 Usage
@@ -130,11 +130,11 @@ To compare if the same user is in the same photo::
 Facial Recognition from videos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To recognise faces from a live video feed
+To recognise faces from a live video feed::
 
     papi.faceRecognition.faceRecognitionFromVideo()
 
-To recognise faces from a video file
+To recognise faces from a video file::
 
     papi.faceRecognition.faceRecognitionFromVideoFile('/folder/location/video.mp4')
 
