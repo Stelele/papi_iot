@@ -22,4 +22,3 @@ python:
   version: 3.7
   install:
     - requirements: pre_requirements.txt
-    - requirements: requirements.txt
