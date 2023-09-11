@@ -1,7 +1,7 @@
 six>=1.14.0
 opencv-python==4.4.0.46  
 
-google-auth-httplib2==0.0.4 
+google-auth-httplib2==0.1.1 
 google-api-python-client==1.12.5 
 google-cloud-storage==1.32.0
 google-auth-oauthlib==0.4.1
