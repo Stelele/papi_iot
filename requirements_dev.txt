@@ -24,7 +24,7 @@ pytest-runner==5.2
 
 pyyaml>=4.2b1
 Click>=7.1.2
-cookiecutter==1.7.2
+cookiecutter==2.4.0
 
 cryptography>=3.2
 
