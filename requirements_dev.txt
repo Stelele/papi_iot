@@ -34,6 +34,6 @@ Flask==1.1.2
 Pillow==8.0.1
 waitress==1.4.4
 
-matplotlib==3.3.2
+matplotlib==3.9.1
 fake-rpi==0.7.1
 
